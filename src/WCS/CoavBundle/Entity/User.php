@@ -20,103 +20,82 @@ class User
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
+    /**
+     * @ORM\ManyToMany(targetEntity="WCS\CoavBundle\Entity\Reservation", inversedBy="passengers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $reservations;
     /**
      * @var string
      *
      * @ORM\Column(name="userName", type="string", length=32)
      */
     private $userName;
-
     /**
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=32)
      */
     private $firstName;
-
     /**
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=32)
      */
     private $lastName;
-
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=64)
      */
     private $email;
-
     /**
      * @var string
      *
      * @ORM\Column(name="phoneNumber", type="string", length=32)
      */
     private $phoneNumber;
-
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="birthDate", type="date")
      */
     private $birthDate;
-
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="creationDate", type="datetime")
      */
     private $creationDate;
-
     /**
      * @var string
      *
      * @ORM\Column(name="role", type="string", length=16)
      */
     private $role;
-
     /**
      * @var int
      *
      * @ORM\Column(name="note", type="smallint", nullable=true)
      */
     private $note;
-
     /**
-     * @ORM\ManyToOne(targetEntity="WCS\CoavBundle\Entity\Review")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToMany(targetEntity="WCS\CoavBundle\Entity\Review", mappedBy="users")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $reviews;
-
     /**
      * @var bool
      *
-     * @ORM\Column(name="isCertifiedPilot", type="boolean")
+     * @ORM\Column(name="isACertifiedPilot", type="boolean")
      */
-    private $isCertifiedPilot;
-
+    private $isACertifiedPilot;
     /**
      * @var bool
      *
      * @ORM\Column(name="isActive", type="boolean")
      */
     private $isActive;
-
-
-    /**
-     * @ORM\ManyToMany(targetEntity="WCS\CoavBundle\Entity\Reservation", inversedBy="passengers")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $reservations;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="WCS\CoavBundle\Entity\Review", mappedBy="userRated")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $reviewsRated;
-
     /**
      * Get id
      *
@@ -126,7 +105,6 @@ class User
     {
         return $this->id;
     }
-
     /**
      * Set userName
      *
@@ -137,10 +115,8 @@ class User
     public function setUserName($userName)
     {
         $this->userName = $userName;
-
         return $this;
     }
-
     /**
      * Get userName
      *
@@ -150,7 +126,6 @@ class User
     {
         return $this->userName;
     }
-
     /**
      * Set firstName
      *
@@ -161,10 +136,8 @@ class User
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
-
         return $this;
     }
-
     /**
      * Get firstName
      *
@@ -174,7 +147,6 @@ class User
     {
         return $this->firstName;
     }
-
     /**
      * Set lastName
      *
@@ -185,10 +157,8 @@ class User
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
-
         return $this;
     }
-
     /**
      * Get lastName
      *
@@ -198,7 +168,6 @@ class User
     {
         return $this->lastName;
     }
-
     /**
      * Set email
      *
@@ -209,10 +178,8 @@ class User
     public function setEmail($email)
     {
         $this->email = $email;
-
         return $this;
     }
-
     /**
      * Get email
      *
@@ -222,7 +189,6 @@ class User
     {
         return $this->email;
     }
-
     /**
      * Set phoneNumber
      *
@@ -233,10 +199,8 @@ class User
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
-
         return $this;
     }
-
     /**
      * Get phoneNumber
      *
@@ -246,7 +210,6 @@ class User
     {
         return $this->phoneNumber;
     }
-
     /**
      * Set birthDate
      *
@@ -257,10 +220,8 @@ class User
     public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
-
         return $this;
     }
-
     /**
      * Get birthDate
      *
@@ -270,7 +231,6 @@ class User
     {
         return $this->birthDate;
     }
-
     /**
      * Set creationDate
      *
@@ -281,10 +241,8 @@ class User
     public function setCreationDate($creationDate)
     {
         $this->creationDate = $creationDate;
-
         return $this;
     }
-
     /**
      * Get creationDate
      *
@@ -294,7 +252,6 @@ class User
     {
         return $this->creationDate;
     }
-
     /**
      * Set role
      *
@@ -305,10 +262,8 @@ class User
     public function setRole($role)
     {
         $this->role = $role;
-
         return $this;
     }
-
     /**
      * Get role
      *
@@ -318,7 +273,6 @@ class User
     {
         return $this->role;
     }
-
     /**
      * Set note
      *
@@ -329,10 +283,8 @@ class User
     public function setNote($note)
     {
         $this->note = $note;
-
         return $this;
     }
-
     /**
      * Get note
      *
@@ -342,7 +294,6 @@ class User
     {
         return $this->note;
     }
-
     /**
      * Set reviews
      *
@@ -353,10 +304,8 @@ class User
     public function setReviews($reviews)
     {
         $this->reviews = $reviews;
-
         return $this;
     }
-
     /**
      * Get reviews
      *
@@ -366,31 +315,27 @@ class User
     {
         return $this->reviews;
     }
-
     /**
-     * Set isCertifiedPilot
+     * Set isACertifiedPilot
      *
-     * @param boolean $isCertifiedPilot
+     * @param boolean $isACertifiedPilot
      *
      * @return User
      */
-    public function setIsCertifiedPilot($isCertifiedPilot)
+    public function setIsACertifiedPilot($isACertifiedPilot)
     {
-        $this->isCertifiedPilot = $isCertifiedPilot;
-
+        $this->isACertifiedPilot = $isACertifiedPilot;
         return $this;
     }
-
     /**
-     * Get isCertifiedPilot
+     * Get isACertifiedPilot
      *
      * @return bool
      */
-    public function getIsCertifiedPilot()
+    public function getIsACertifiedPilot()
     {
-        return $this->isCertifiedPilot;
+        return $this->isACertifiedPilot;
     }
-
     /**
      * Set isActive
      *
@@ -401,10 +346,8 @@ class User
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
-
         return $this;
     }
-
     /**
      * Get isActive
      *
@@ -414,7 +357,6 @@ class User
     {
         return $this->isActive;
     }
-
     /**
      * Constructor
      */
@@ -422,7 +364,6 @@ class User
     {
         $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
     /**
      * Add reservation
      *
@@ -433,10 +374,8 @@ class User
     public function addReservation(\WCS\CoavBundle\Entity\Reservation $reservation)
     {
         $this->reservations[] = $reservation;
-
         return $this;
     }
-
     /**
      * Remove reservation
      *
@@ -446,7 +385,6 @@ class User
     {
         $this->reservations->removeElement($reservation);
     }
-
     /**
      * Get reservations
      *
@@ -456,39 +394,25 @@ class User
     {
         return $this->reservations;
     }
-
-
     /**
-     * Add reviewsRated
+     * Add review
      *
-     * @param \WCS\CoavBundle\Entity\Review $reviewsRated
+     * @param \WCS\CoavBundle\Entity\Review $review
      *
      * @return User
      */
-    public function addReviewsRated(\WCS\CoavBundle\Entity\Review $reviewsRated)
+    public function addReview(\WCS\CoavBundle\Entity\Review $review)
     {
-        $this->reviewsRated[] = $reviewsRated;
-
+        $this->reviews[] = $review;
         return $this;
     }
-
     /**
-     * Remove reviewsRated
+     * Remove review
      *
-     * @param \WCS\CoavBundle\Entity\Review $reviewsRated
+     * @param \WCS\CoavBundle\Entity\Review $review
      */
-    public function removeReviewsRated(\WCS\CoavBundle\Entity\Review $reviewsRated)
+    public function removeReview(\WCS\CoavBundle\Entity\Review $review)
     {
-        $this->reviewsRated->removeElement($reviewsRated);
-    }
-
-    /**
-     * Get reviewsRated
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getReviewsRated()
-    {
-        return $this->reviewsRated;
+        $this->reviews->removeElement($review);
     }
 }

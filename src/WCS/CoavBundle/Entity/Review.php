@@ -20,41 +20,39 @@ class Review
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="text", type="text")
      */
     private $text;
-
     /**
-     * @ORM\ManyToMany(targetEntity="WCS\CoavBundle\Entity\User", inversedBy="reviewsRated")
+     * @ORM\ManyToOne(targetEntity="WCS\CoavBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $userRated;
-
     /**
      * @ORM\ManyToOne(targetEntity="WCS\CoavBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $reviewAuthor;
-
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="publicationDate", type="datetime")
      */
     private $publicationDate;
-
     /**
      * @var int
      *
      * @ORM\Column(name="note", type="smallint")
      */
     private $note;
-
-
+    /**
+     * @ORM\ManyToMany(targetEntity="WCS\CoavBundle\Entity\User", inversedBy="reviews")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $users;
     /**
      * Get id
      *
@@ -64,7 +62,6 @@ class Review
     {
         return $this->id;
     }
-
     /**
      * Set text
      *
@@ -75,10 +72,8 @@ class Review
     public function setText($text)
     {
         $this->text = $text;
-
         return $this;
     }
-
     /**
      * Get text
      *
@@ -88,7 +83,6 @@ class Review
     {
         return $this->text;
     }
-
     /**
      * Set userRated
      *
@@ -99,10 +93,8 @@ class Review
     public function setUserRated($userRated)
     {
         $this->userRated = $userRated;
-
         return $this;
     }
-
     /**
      * Get userRated
      *
@@ -112,7 +104,6 @@ class Review
     {
         return $this->userRated;
     }
-
     /**
      * Set reviewAuthor
      *
@@ -123,10 +114,8 @@ class Review
     public function setReviewAuthor($reviewAuthor)
     {
         $this->reviewAuthor = $reviewAuthor;
-
         return $this;
     }
-
     /**
      * Get reviewAuthor
      *
@@ -136,7 +125,6 @@ class Review
     {
         return $this->reviewAuthor;
     }
-
     /**
      * Set publicationDate
      *
@@ -147,10 +135,8 @@ class Review
     public function setPublicationDate($publicationDate)
     {
         $this->publicationDate = $publicationDate;
-
         return $this;
     }
-
     /**
      * Get publicationDate
      *
@@ -160,7 +146,6 @@ class Review
     {
         return $this->publicationDate;
     }
-
     /**
      * Set note
      *
@@ -171,10 +156,8 @@ class Review
     public function setNote($note)
     {
         $this->note = $note;
-
         return $this;
     }
-
     /**
      * Get note
      *
@@ -189,30 +172,36 @@ class Review
      */
     public function __construct()
     {
-        $this->userRated = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
     /**
-     * Add userRated
+     * Add user
      *
-     * @param \WCS\CoavBundle\Entity\User $userRated
+     * @param \WCS\CoavBundle\Entity\User $user
      *
      * @return Review
      */
-    public function addUserRated(\WCS\CoavBundle\Entity\User $userRated)
+    public function addUser(\WCS\CoavBundle\Entity\User $user)
     {
-        $this->userRated[] = $userRated;
-
+        $this->users[] = $user;
         return $this;
     }
-
     /**
-     * Remove userRated
+     * Remove user
      *
-     * @param \WCS\CoavBundle\Entity\User $userRated
+     * @param \WCS\CoavBundle\Entity\User $user
      */
-    public function removeUserRated(\WCS\CoavBundle\Entity\User $userRated)
+    public function removeUser(\WCS\CoavBundle\Entity\User $user)
     {
-        $this->userRated->removeElement($userRated);
+        $this->users->removeElement($user);
+    }
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }
