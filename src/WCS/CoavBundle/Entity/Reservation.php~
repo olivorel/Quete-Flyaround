@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Reservation
 {
+
     /**
      * @var int
      *
@@ -36,6 +37,7 @@ class Reservation
     private $publicationDate;
 
     /**
+     *
      * @ORM\ManyToMany(targetEntity="WCS\CoavBundle\Entity\User", mappedBy="reservations")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -43,8 +45,8 @@ class Reservation
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="flight", type="string", length=32)
+     *@ORM\ManyToOne(targetEntity="WCS\CoavBundle\Entity\Flight", inversedBy="flights")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $flight;
 

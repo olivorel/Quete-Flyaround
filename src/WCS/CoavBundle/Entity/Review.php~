@@ -48,11 +48,7 @@ class Review
      * @ORM\Column(name="note", type="smallint")
      */
     private $note;
-    /**
-     * @ORM\ManyToMany(targetEntity="WCS\CoavBundle\Entity\User", inversedBy="reviews")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $users;
+
     /**
      * Get id
      *
@@ -62,6 +58,7 @@ class Review
     {
         return $this->id;
     }
+
     /**
      * Set text
      *
@@ -74,6 +71,7 @@ class Review
         $this->text = $text;
         return $this;
     }
+
     /**
      * Get text
      *
@@ -83,6 +81,7 @@ class Review
     {
         return $this->text;
     }
+
     /**
      * Set userRated
      *
@@ -95,6 +94,7 @@ class Review
         $this->userRated = $userRated;
         return $this;
     }
+
     /**
      * Get userRated
      *
@@ -104,6 +104,7 @@ class Review
     {
         return $this->userRated;
     }
+
     /**
      * Set reviewAuthor
      *
@@ -116,6 +117,7 @@ class Review
         $this->reviewAuthor = $reviewAuthor;
         return $this;
     }
+
     /**
      * Get reviewAuthor
      *
@@ -125,6 +127,7 @@ class Review
     {
         return $this->reviewAuthor;
     }
+
     /**
      * Set publicationDate
      *
@@ -137,6 +140,7 @@ class Review
         $this->publicationDate = $publicationDate;
         return $this;
     }
+
     /**
      * Get publicationDate
      *
@@ -146,6 +150,7 @@ class Review
     {
         return $this->publicationDate;
     }
+
     /**
      * Set note
      *
@@ -158,6 +163,7 @@ class Review
         $this->note = $note;
         return $this;
     }
+
     /**
      * Get note
      *
@@ -166,42 +172,5 @@ class Review
     public function getNote()
     {
         return $this->note;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    /**
-     * Add user
-     *
-     * @param \WCS\CoavBundle\Entity\User $user
-     *
-     * @return Review
-     */
-    public function addUser(\WCS\CoavBundle\Entity\User $user)
-    {
-        $this->users[] = $user;
-        return $this;
-    }
-    /**
-     * Remove user
-     *
-     * @param \WCS\CoavBundle\Entity\User $user
-     */
-    public function removeUser(\WCS\CoavBundle\Entity\User $user)
-    {
-        $this->users->removeElement($user);
-    }
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
     }
 }
