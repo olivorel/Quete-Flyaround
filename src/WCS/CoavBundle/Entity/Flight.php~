@@ -365,7 +365,7 @@ class Flight
      *
      * @return Flight
      */
-    public function addFlight(\WCS\CoavBundle\Entity\Reservation $flight)
+    public function addFlight(Reservation $flight)
     {
         $this->flights[] = $flight;
 
@@ -377,7 +377,7 @@ class Flight
      *
      * @param \WCS\CoavBundle\Entity\Reservation $flight
      */
-    public function removeFlight(\WCS\CoavBundle\Entity\Reservation $flight)
+    public function removeFlight(Reservation $flight)
     {
         $this->flights->removeElement($flight);
     }
