@@ -3,6 +3,7 @@
 namespace WCS\CoavBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use WCS\CoavBundle\Controller\ReservationController;
 
 /**
  * Flight
