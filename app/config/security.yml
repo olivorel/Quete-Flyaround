@@ -28,3 +28,9 @@ security:
         - { path: ^register, role: IS_AUTHENTIFICATED_ANONYMOUSLY }
         - { path: ^resetting, role: IS_AUTHENTIFICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+#        - { path: ^/flight, role: ROLE_USER }
+#        - { path: ^/planetmodel, role: ROLE_USER }
+#        - { path: ^/reservation, role: ROLE_USER }
+#        - { path: ^/review, role: ROLE_USER }
+#        - { path: ^/terrain, role: ROLE_USER }
+#        - { path: ^/user, role: ROLE_USER }
