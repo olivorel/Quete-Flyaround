@@ -14,7 +14,7 @@
                 <th>Phonenumber</th>
                 <th>Birthdate</th>
                 <th>Creationdate</th>
-                <th>Role</th>
+                {#<th>Role</th>#}
                 <th>Note</th>
                 <th>Reviews</th>
                 <th>Iscertifiedpilot</th>
@@ -33,7 +33,7 @@
                 <td>{{ user.phoneNumber }}</td>
                 <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d') }}{% endif %}</td>
                 <td>{% if user.creationDate %}{{ user.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ user.role }}</td>
+                {#<td>{{ user.role }}</td>#}
                 <td>{{ user.note }}</td>
                 <td>{{ user.reviews }}</td>
                 <td>{% if user.isCertifiedPilot %}Yes{% else %}No{% endif %}</td>

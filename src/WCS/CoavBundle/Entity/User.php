@@ -34,7 +34,7 @@ class User extends BaseUser
      * @ORM\ManyToMany(targetEntity="WCS\CoavBundle\Entity\Reservation", inversedBy="passengers")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $reservations;
+    protected $reservations;
     /**
      * @var string
      *
@@ -53,44 +53,49 @@ class User extends BaseUser
      *
      * @ORM\Column(name="phoneNumber", type="string", length=32)
      */
-    private $phoneNumber;
+    protected $phoneNumber;
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="birthDate", type="date")
      */
-    private $birthDate;
+    protected $birthDate;
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="creationDate", type="datetime")
      */
-    private $creationDate;
+    protected $creationDate;
 
     /**
      * @var int
      *
      * @ORM\Column(name="note", type="smallint", nullable=true)
      */
-    private $note;
+    protected $note;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="isACertifiedPilot", type="boolean")
      */
-    private $isACertifiedPilot;
+    protected $isACertifiedPilot;
     /**
      * @var bool
      *
      * @ORM\Column(name="isActive", type="boolean")
      */
-    private $isActive;
+    protected $isActive;
     /**
      * Get id
      *
      * @return int
      */
+    /**
+     * @ORM\OneToOne(targetEntity="WCS\CoavBundle\Entity\Flight", mappedBy="pilot")
+     */
+    protected $flightPilot;
+
     public function getId()
     {
         return $this->id;
@@ -326,5 +331,29 @@ class User extends BaseUser
     public function removeReview(\WCS\CoavBundle\Entity\Review $review)
     {
         $this->reviews->removeElement($review);
+    }
+
+    /**
+     * Set flightPilot
+     *
+     * @param \WCS\CoavBundle\Entity\Flight $flightPilot
+     *
+     * @return User
+     */
+    public function setFlightPilot(\WCS\CoavBundle\Entity\Flight $flightPilot = null)
+    {
+        $this->flightPilot = $flightPilot;
+
+        return $this;
+    }
+
+    /**
+     * Get flightPilot
+     *
+     * @return \WCS\CoavBundle\Entity\Flight
+     */
+    public function getFlightPilot()
+    {
+        return $this->flightPilot;
     }
 }

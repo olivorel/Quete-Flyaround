@@ -5,8 +5,7 @@ namespace WCS\CoavBundle\Controller;
 use WCS\CoavBundle\Entity\Flight;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Flight controller.
@@ -132,6 +131,6 @@ class FlightController extends Controller
             ->setAction($this->generateUrl('flight_delete', array('id' => $flight->getId())))
             ->setMethod('DELETE')
             ->getForm()
-        ;
+            ;
     }
 }
