@@ -20,3 +20,11 @@ services:
 
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
+
+    WCS\CoavBundle\:
+        resource: '../../src/WCS/CoavBundle/*'
+        exclude: '../../src/WCS/CoavBundle/{Entity,Repository,Tests}'
+
+    WCS\CoavBundle\Service\FlightInfos:
+        arguments:
+            $unit:    '%unit%'

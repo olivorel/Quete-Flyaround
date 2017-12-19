@@ -34,7 +34,6 @@
                 {#<td>{{ flight.pilot }}</td>#}
                 <td>{{ flight.plane }}</td>
                 <td>{% if flight.wasDone %}Yes{% else %}No{% endif %}</td>
-                <td>
                     <ul>
                         <li>
                             <a href="{{ path('flight_show', { 'id': flight.id }) }}">show</a>

@@ -2,10 +2,13 @@
 
 namespace WCS\CoavBundle\Controller;
 
+use Proxies\__CG__\WCS\CoavBundle\Entity\PlanetModel;
 use WCS\CoavBundle\Entity\Flight;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use WCS\CoavBundle\Service\FlightInfos;
 
 /**
  * Flight controller.
@@ -63,14 +66,43 @@ class FlightController extends Controller
      * @Route("/{id}", name="flight_show")
      * @Method("GET")
      */
-    public function showAction(Flight $flight)
+    public function showAction(Flight $flight, FlightInfos $flightInfos)
     {
+        $distance = $flightInfos->getDistance(
+            $flight->getDeparture()->getLatitude(),
+            $flight->getDeparture()->getLongitude(),
+            $flight->getArrival()->getLatitude(),
+            $flight->getDeparture()->getLongitude()
+        );
+
+        $duration = $flightInfos->getDuration(
+            $flight->getPlane()->getCruiseSpeed(),
+            $distance
+        );
+
         $deleteForm = $this->createDeleteForm($flight);
 
         return $this->render('flight/show.html.twig', array(
             'flight' => $flight,
             'delete_form' => $deleteForm->createView(),
+            'distance' => $distance,
+            'duration' => $duration,
         ));
+    }
+
+    /**
+     * Creates a form to delete a flight entity.
+     *
+     * @param Flight $flight The flight entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Flight $flight)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('flight_delete', array('id' => $flight->getId())))
+            ->setMethod('DELETE')
+            ->getForm();
     }
 
     /**
@@ -116,21 +148,5 @@ class FlightController extends Controller
         }
 
         return $this->redirectToRoute('flight_index');
-    }
-
-    /**
-     * Creates a form to delete a flight entity.
-     *
-     * @param Flight $flight The flight entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Flight $flight)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('flight_delete', array('id' => $flight->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-            ;
     }
 }
